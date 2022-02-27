@@ -1,4 +1,3 @@
-#include <list>
 #include <stdexcept>
 
 #include "gtest/gtest.h"
@@ -16,7 +15,7 @@ TYPED_TEST(MatrixTest, InitializeConstant) {
   std::size_t num_rows = 13;
   std::size_t num_cols = 8;
   const TypeParam value = static_cast<TypeParam>(-1.37e-4);
-  selnm::Matrix<TypeParam> m(num_rows, num_cols, value);
+  libselnm::Matrix<TypeParam> m(num_rows, num_cols, value);
 
   ASSERT_EQ(m.columns(), num_cols);
   ASSERT_EQ(m.rows(), num_rows);
@@ -36,7 +35,7 @@ TYPED_TEST(MatrixTest, InitializeList) {
   const TypeParam f4 = static_cast<TypeParam>(4.0);
   const TypeParam f5 = static_cast<TypeParam>(5.0);
   const TypeParam f6 = static_cast<TypeParam>(6.0);
-  selnm::Matrix<TypeParam> m(num_rows, num_cols, {f1, f2, f3, f4, f5, f6});
+  libselnm::Matrix<TypeParam> m(num_rows, num_cols, {f1, f2, f3, f4, f5, f6});
 
   ASSERT_EQ(m.columns(), num_cols);
   ASSERT_EQ(m.rows(), num_rows);
@@ -62,7 +61,7 @@ TYPED_TEST(MatrixTest, Accessors) {
   const TypeParam value2 = static_cast<TypeParam>(2.0);
   const TypeParam value3 = static_cast<TypeParam>(3.0);
   const TypeParam value4 = static_cast<TypeParam>(4.0);
-  selnm::Matrix<TypeParam> m(num_rows, num_cols, value0);
+  libselnm::Matrix<TypeParam> m(num_rows, num_cols, value0);
 
   // Check accessors for the sizes
   ASSERT_EQ(m.columns(), num_cols);
@@ -108,11 +107,11 @@ TYPED_TEST(MatrixTest, Equality) {
   std::size_t num_cols = 7;
   const TypeParam value0 = static_cast<TypeParam>(0.0);
   const TypeParam value1 = static_cast<TypeParam>(1.0);
-  selnm::Matrix<TypeParam> m(num_rows, num_cols, value0);
-  selnm::Matrix<TypeParam> n(num_rows, num_cols, value0);
-  selnm::Matrix<TypeParam> o(num_rows + 1, num_cols, value0);
-  selnm::Matrix<TypeParam> p(num_rows, num_cols + 1, value0);
-  selnm::Matrix<TypeParam> q(num_rows, num_cols, value0);
+  libselnm::Matrix<TypeParam> m(num_rows, num_cols, value0);
+  libselnm::Matrix<TypeParam> n(num_rows, num_cols, value0);
+  libselnm::Matrix<TypeParam> o(num_rows + 1, num_cols, value0);
+  libselnm::Matrix<TypeParam> p(num_rows, num_cols + 1, value0);
+  libselnm::Matrix<TypeParam> q(num_rows, num_cols, value0);
   q(0, 0) = value1;
 
   // Check equality
@@ -142,15 +141,15 @@ TYPED_TEST(MatrixTest, ScalarAddition) {
   std::size_t num_cols = 7;
   const TypeParam value0 = static_cast<TypeParam>(2.0);
   const TypeParam value1 = static_cast<TypeParam>(4.0);
-  selnm::Matrix<TypeParam> m(num_rows, num_cols, value0);
-  selnm::Matrix<TypeParam> n(num_rows, num_cols, value0 + value1);
-  selnm::Matrix<TypeParam> o(num_rows, num_cols, value0);
+  libselnm::Matrix<TypeParam> m(num_rows, num_cols, value0);
+  libselnm::Matrix<TypeParam> n(num_rows, num_cols, value0 + value1);
+  libselnm::Matrix<TypeParam> o(num_rows, num_cols, value0);
 
   // Check compound assignment
   EXPECT_EQ(m += value1, n);
 
   // Check matrix + scalar
-  selnm::Matrix<TypeParam> p = o + value1;
+  libselnm::Matrix<TypeParam> p = o + value1;
   EXPECT_EQ(p, n);
 }
 
@@ -159,15 +158,15 @@ TYPED_TEST(MatrixTest, ScalarSubtraction) {
   std::size_t num_cols = 7;
   const TypeParam value0 = static_cast<TypeParam>(2.0);
   const TypeParam value1 = static_cast<TypeParam>(4.0);
-  selnm::Matrix<TypeParam> m(num_rows, num_cols, value0);
-  selnm::Matrix<TypeParam> n(num_rows, num_cols, value0 - value1);
-  selnm::Matrix<TypeParam> o(num_rows, num_cols, value0);
+  libselnm::Matrix<TypeParam> m(num_rows, num_cols, value0);
+  libselnm::Matrix<TypeParam> n(num_rows, num_cols, value0 - value1);
+  libselnm::Matrix<TypeParam> o(num_rows, num_cols, value0);
 
   // Check compound assignment
   EXPECT_EQ(m -= value1, n);
 
   // Check matrix - scalar
-  selnm::Matrix<TypeParam> p = o - value1;
+  libselnm::Matrix<TypeParam> p = o - value1;
   EXPECT_EQ(p, n);
 }
 
@@ -176,15 +175,15 @@ TYPED_TEST(MatrixTest, ScalarMultiplication) {
   std::size_t num_cols = 7;
   const TypeParam value0 = static_cast<TypeParam>(2.0);
   const TypeParam value1 = static_cast<TypeParam>(4.0);
-  selnm::Matrix<TypeParam> m(num_rows, num_cols, value0);
-  selnm::Matrix<TypeParam> n(num_rows, num_cols, value0 * value1);
-  selnm::Matrix<TypeParam> o(num_rows, num_cols, value0);
+  libselnm::Matrix<TypeParam> m(num_rows, num_cols, value0);
+  libselnm::Matrix<TypeParam> n(num_rows, num_cols, value0 * value1);
+  libselnm::Matrix<TypeParam> o(num_rows, num_cols, value0);
 
   // Check compound assignment
   EXPECT_EQ(m *= value1, n);
 
   // Check matrix * scalar
-  selnm::Matrix<TypeParam> p = o * value1;
+  libselnm::Matrix<TypeParam> p = o * value1;
   EXPECT_EQ(p, n);
 }
 
@@ -193,15 +192,15 @@ TYPED_TEST(MatrixTest, ScalarDivision) {
   std::size_t num_cols = 7;
   const TypeParam value0 = static_cast<TypeParam>(2.0);
   const TypeParam value1 = static_cast<TypeParam>(4.0);
-  selnm::Matrix<TypeParam> m(num_rows, num_cols, value0);
-  selnm::Matrix<TypeParam> n(num_rows, num_cols, value0 / value1);
-  selnm::Matrix<TypeParam> o(num_rows, num_cols, value0);
+  libselnm::Matrix<TypeParam> m(num_rows, num_cols, value0);
+  libselnm::Matrix<TypeParam> n(num_rows, num_cols, value0 / value1);
+  libselnm::Matrix<TypeParam> o(num_rows, num_cols, value0);
 
   // Check compound assignment
   EXPECT_EQ(m /= value1, n);
 
   // Check matrix / scalar
-  selnm::Matrix<TypeParam> p = o / value1;
+  libselnm::Matrix<TypeParam> p = o / value1;
   EXPECT_EQ(p, n);
 }
 
@@ -210,22 +209,22 @@ TYPED_TEST(MatrixTest, MatrixAddition) {
   std::size_t num_cols = 7;
   const TypeParam value0 = static_cast<TypeParam>(2.0);
   const TypeParam value1 = static_cast<TypeParam>(4.0);
-  selnm::Matrix<TypeParam> m(num_rows, num_cols, value0);
-  selnm::Matrix<TypeParam> mm(num_rows, num_cols, value0);
-  selnm::Matrix<TypeParam> n(num_rows, num_cols, value1);
-  selnm::Matrix<TypeParam> o(num_rows, num_cols, value0 + value1);
+  libselnm::Matrix<TypeParam> m(num_rows, num_cols, value0);
+  libselnm::Matrix<TypeParam> mm(num_rows, num_cols, value0);
+  libselnm::Matrix<TypeParam> n(num_rows, num_cols, value1);
+  libselnm::Matrix<TypeParam> o(num_rows, num_cols, value0 + value1);
 
   // Check compound assignment
   EXPECT_EQ(m += n, o);
 
   // Check matrix + matrix
-  selnm::Matrix<TypeParam> p = mm + n;
+  libselnm::Matrix<TypeParam> p = mm + n;
   EXPECT_EQ(p, o);
 
   // Check exception on incompatible sizes
-  selnm::Matrix<TypeParam> a(5, 5, 0.0);
-  selnm::Matrix<TypeParam> b(6, 5, 0.0);
-  selnm::Matrix<TypeParam> c(5, 6, 0.0);
+  libselnm::Matrix<TypeParam> a(5, 5, 0.0);
+  libselnm::Matrix<TypeParam> b(6, 5, 0.0);
+  libselnm::Matrix<TypeParam> c(5, 6, 0.0);
   EXPECT_THROW(a + b, std::invalid_argument);
   EXPECT_THROW(a + c, std::invalid_argument);
 }
@@ -233,10 +232,10 @@ TYPED_TEST(MatrixTest, MatrixAddition) {
 TYPED_TEST(MatrixTest, MatrixMultiplication) {
   std::size_t m = 2;
   std::size_t n = 3;
-  selnm::Matrix<TypeParam> A(m, n, {1, 2, 3, 4, 5, 6});
-  selnm::Matrix<TypeParam> B(n, m, {1, 2, 3, 4, 5, 6});
-  selnm::Matrix<TypeParam> C(m, m, {22, 28, 49, 64});
-  selnm::Matrix<TypeParam> D(n, n, {9, 12, 15, 19, 26, 33, 29, 40, 51});
+  libselnm::Matrix<TypeParam> A(m, n, {1, 2, 3, 4, 5, 6});
+  libselnm::Matrix<TypeParam> B(n, m, {1, 2, 3, 4, 5, 6});
+  libselnm::Matrix<TypeParam> C(m, m, {22, 28, 49, 64});
+  libselnm::Matrix<TypeParam> D(n, n, {9, 12, 15, 19, 26, 33, 29, 40, 51});
 
   // Check matrix * matrix
   EXPECT_EQ(A * B, C);

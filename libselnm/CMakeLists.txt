@@ -1,5 +1,5 @@
 add_library(libselnm INTERFACE)
-set_target_properties(libselnm PROPERTIES PUBLIC_HEADER matrix.hpp)
+set_target_properties(libselnm PROPERTIES PUBLIC_HEADER "mapped_list.hpp;matrix.hpp")
 target_include_directories(libselnm INTERFACE
   $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}>
   $<INSTALL_INTERFACE:include>
@@ -9,6 +9,8 @@ install(TARGETS libselnm
     DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/libselnm
   )
 
-add_executable(matrix.test matrix.test.cpp)
-target_link_libraries(matrix.test libselnm gtest gtest_main)
-add_test(matrix.test matrix.test)
+foreach(_name mapped_list matrix)
+  add_executable(${_name}.test ${_name}.test.cpp)
+  target_link_libraries(${_name}.test libselnm gtest gtest_main)
+  add_test(${_name}.test ${_name}.test)
+endforeach()

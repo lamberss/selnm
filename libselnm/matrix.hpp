@@ -7,7 +7,7 @@
 #include <stdexcept>
 #include <vector>
 
-namespace selnm {
+namespace libselnm {
 
 template <class T>
 class Matrix {
@@ -168,6 +168,6 @@ class Matrix {
   std::vector<T> data_;
 };
 
-};  // namespace selnm
+};  // namespace libselnm
 
 #endif  // LIBSELNM_MATRIX_HPP_
